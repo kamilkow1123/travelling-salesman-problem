@@ -41,7 +41,7 @@ double getPRD(int len, int opt){
 
 int* bruteForce(GraphAM *graph, int src){
     int numOfVer = graph->getNumOfVertexes();
-    if(src >= numOfVer || src < 0) return 0;
+    if(src >= numOfVer || src < 0) return nullptr;
 
     //cout<<"Number of possible routes: "<<factorial(numOfVer - 1)<<endl;
 
