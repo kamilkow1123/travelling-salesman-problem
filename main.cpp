@@ -5,18 +5,13 @@
 
 using namespace std;
 
-float unitFactor = 1.0f; //microseconds
+float unitFactor = 1.0f; //seconds
 string unit = " seconds";
 
-int main(){
-    GraphAM *graphAM = new GraphAM();
-
-    graphAM->fillGraphFromFile("data/m11.atsp");
-    //graphAM->printGraph();
-
+void runBruteForce(GraphAM *graph){
     float time = 0;
     Timer timer;
-    int *result = bruteForce(graphAM, 0);
+    int *result = bruteForce(graph, 0);
     time += timer.getTime().count() * unitFactor;
     int shortestPathWeigh = result[0];
     int lengthOfRoute = result[1];
@@ -27,6 +22,15 @@ int main(){
     }
     cout<<endl<<"Weigh: "<<shortestPathWeigh<<endl;
     cout<<"Brute force took: "<<time<<unit<<endl;
+}
+
+int main(){
+    GraphAM *graph = new GraphAM();
+
+    graph->fillGraphFromFile("data/m11.atsp");
+    //graph->printGraph();
+
+    runBruteForce(graph);
 
     return 0;
 }

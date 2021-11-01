@@ -4,6 +4,31 @@
 #include "../AdjacencyMatrixGraph/graphAM.h"
 using namespace std;
 
+template<class BidirIt>
+bool nextPermutation(BidirIt first, BidirIt last)
+{
+    if (first == last) return false;
+    BidirIt i = last;
+    if (first == --i) return false;
+
+    while (true) {
+        BidirIt i1, i2;
+
+        i1 = i;
+        if (*--i < *i1) {
+            i2 = last;
+            while (!(*i < *--i2));
+            std::iter_swap(i, i2);
+            std::reverse(i1, last);
+            return true;
+        }
+        if (i == first) {
+            std::reverse(first, last);
+            return false;
+        }
+    }
+}
+
 // unsigned long long int factorial(int n){
 //     if(n == 1) return 1;
 
@@ -30,6 +55,11 @@ int* bruteForce(GraphAM *graph, int src){
     int shortestPathWeigh = INT_MAX;
     int shortestPathSize = routeSize + 2; //routeSize + 2 -> src vertex at the beginning and at the end
     int *shortestPath = new int[shortestPathSize];
+
+    bool isFirst = true;
+    int firstShortestPathWeigh = INT_MAX;
+    double firstPRD;
+
     do{
         int pathWeigh = 0;
         int currentNode = src;
@@ -48,11 +78,22 @@ int* bruteForce(GraphAM *graph, int src){
             }
             shortestPath[shortestPathSize - 1] = src; //src at the end
 
+
             //print info about new shortest path
             cout<<"Weigh: "<<shortestPathWeigh<<"     ";
-            cout<<fixed<<setprecision(2)<<"PRD: "<<getPRD(shortestPathWeigh, graph->getOptimalValue())<<"%"<<endl;
+            double prd = getPRD(shortestPathWeigh, graph->getOptimalValue());
+            cout<<fixed<<setprecision(2)<<"PRD: "<<prd<<"%"<<endl;
+
+            if(isFirst){
+                firstShortestPathWeigh = shortestPathWeigh;
+                firstPRD = prd;
+                isFirst = false;
+            }
         }
-    }while(next_permutation(route, route + routeSize)); //continue for new permutation
+    }while(nextPermutation(route, route + routeSize)); //continue with new permutation
+
+    cout<<"Weigh: "<<firstShortestPathWeigh<<"     ";
+    cout<<fixed<<setprecision(2)<<"PRD: "<<firstPRD<<"%"<<endl;
 
     int resultSize = shortestPathSize + 2; //two extra items for shortestPathWeigh and shortestPathSize
     int *result = new int[resultSize]; //array for results
