@@ -5,9 +5,10 @@
 #include "graphAM.h"
 using namespace std;
 
-GraphAM::GraphAM(){ //initialize the graph with zeros and null
+GraphAM::GraphAM(){ //initialize the graph with zero and null
     this->numOfVertexes = 0;
     this->graph = nullptr;
+    this->optimalValue = 0;
 }
 
 GraphAM::~GraphAM(){ //release the memory allocated for the graph
@@ -52,11 +53,19 @@ int GraphAM::findElement(int n, int m){ //return the value from the array's give
     return graph[n][m];
 }
 
-void GraphAM::addVertexes(int vertexes){ //initialize the incidence matrix with the given number of vertices
+int GraphAM::getOptimalValue(){ //return optimal Hamiltonian circuit
+    return optimalValue;
+}
+
+void GraphAM::setOptimalValue(int opt){ //set optimal Hamiltonian circuit
+    this->optimalValue = opt;
+}
+
+void GraphAM::addVertexes(int vertexes){ //initialize the adjacency matrix with the given number of vertices
     this->graph = new int *[vertexes]; //create array of arrays for the vertices
     this->numOfVertexes = vertexes; //set the number of vertices in the graph
     for(int i = 0; i<numOfVertexes; i++){
-        this->graph[i] = new int[vertexes] {0}; //set the vertexes arrays - no edges yet so they're empty
+        this->graph[i] = new int[vertexes] {0}; //set the vertexes arrays filled with zeros
     }
 }
 
@@ -64,15 +73,14 @@ void GraphAM::addEdge(int i, int j, int edgeValue){
     graph[i][j] = edgeValue;
 }
 
-void GraphAM::fillGraphFromFile(){
+void GraphAM::fillGraphFromFile(string file){
     if(numOfVertexes != 0){ //if the graph is not empty, print that and return
         cout<<" Graph is not empty"<<endl;
         return;
     }
 
     fstream in;
-    in.open("../data/gr17.tsp", ios::in); //open the file with the description of the edges
-    if(!in.good()) in.open("data/gr17.tsp", ios::in); //if opening failed try in different location
+    in.open(file, ios::in); //open the file with the description of the edges
 
     if(in.good()){ //if the file opened correctly, fill the graph
         string fileName;
@@ -90,6 +98,10 @@ void GraphAM::fillGraphFromFile(){
                 this->addEdge(i, j, edge);
             }
         }
+        int optVal;
+        in>>optVal;
+        this->setOptimalValue(optVal);
+
         cout<<" Successfully filled matrix!"<<endl; //filled the graph from file
         in.close();
     }
