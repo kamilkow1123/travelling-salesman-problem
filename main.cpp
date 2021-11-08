@@ -1,7 +1,8 @@
 #include <iostream>
+#include<string>
 #include "AdjacencyMatrixGraph/graphAM.cpp"
 #include "BruteForce/bruteForce.cpp"
-#include "BranchAndBound/branchAndBound.cpp"
+#include "HeldKarp/heldKarp.cpp"
 #include "Timer/timer.cpp"
 
 using namespace std;
@@ -14,34 +15,35 @@ void runBruteForce(GraphAM *graph, int src){
     Timer timer;
     int *result = bruteForce(graph, src);
     time += timer.getTime().count() * unitFactor;
-    int shortestPathWeigh = result[0];
+    int shortestPathWeight = result[0];
     int lengthOfRoute = result[1];
 
-    cout<<"Shortest path: ";
+    cout<<" Shortest path: ";
     for(int i = 0; i < lengthOfRoute; i++){
         cout<<result[i + 2]<<" ";
     }
-    cout<<endl<<"Weigh: "<<shortestPathWeigh<<endl;
-    cout<<"Brute force took: "<<time<<unit<<endl;
+    cout<<endl<<" Weight: "<<shortestPathWeight<<endl;
+    cout<<fixed<<setprecision(4)<<" Brute force took: "<<time<<unit<<endl<<endl;
 }
 
-void runBranchAndBound(GraphAM *graph, int src){
+void runHeldKarp(GraphAM *graph){
     float time = 0;
     Timer timer;
-    int *result = branchAndBound(graph, src);
+    int answer = heldKarp(graph);
     time += timer.getTime().count() * unitFactor;
-    cout<<"Branch and bound took: "<<time<<unit<<endl;
+    cout<<" Weight: "<<answer<<endl;
+    cout<<fixed<<setprecision(4)<<" Held-Karp took: "<<time<<unit<<endl<<endl;
 }
 
 int main(){
     GraphAM *graph = new GraphAM();
 
-    graph->fillGraphFromFile("data/m11.atsp");
+    graph->fillGraphFromFile("data/m12.atsp");
     //graph->printGraph();
 
     runBruteForce(graph, 0);
 
-    runBranchAndBound(graph, 0);
+    runHeldKarp(graph);
 
     return 0;
 }
