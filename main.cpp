@@ -1,5 +1,6 @@
 #include <iostream>
-#include<string>
+#include <string>
+#include <conio.h>
 #include "AdjacencyMatrixGraph/graphAM.cpp"
 #include "BruteForce/bruteForce.cpp"
 #include "HeldKarp/heldKarp.cpp"
@@ -38,7 +39,7 @@ void runHeldKarp(GraphAM *graph){
 int main(){
     GraphAM *graph = new GraphAM();
 
-    graph->fillGraphFromFile("instances/m10.atsp");
+    graph->fillGraphFromFile("data/m12.atsp");
     //graph->printGraph();
 
     runBruteForce(graph, 0);
@@ -46,6 +47,9 @@ int main(){
     runHeldKarp(graph);
 
     delete graph;
+
+    cout<<endl<<" Press any key to exit";
+    getch();
 
     return 0;
 }
