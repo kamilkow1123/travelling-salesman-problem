@@ -4,31 +4,6 @@
 #include "../AdjacencyMatrixGraph/graphAM.h"
 using namespace std;
 
-template<class BidirIt>
-bool nextPermutation(BidirIt first, BidirIt last)
-{
-    if (first == last) return false;
-    BidirIt i = last;
-    if (first == --i) return false;
-
-    while (true) {
-        BidirIt i1, i2;
-
-        i1 = i;
-        if (*--i < *i1) {
-            i2 = last;
-            while (!(*i < *--i2));
-            std::iter_swap(i, i2);
-            std::reverse(i1, last);
-            return true;
-        }
-        if (i == first) {
-            std::reverse(first, last);
-            return false;
-        }
-    }
-}
-
 double getPRD(int len, int opt){
     return double(100 * (len - opt))/opt;
 }
@@ -81,7 +56,7 @@ int* bruteForce(GraphAM *graph, int src){
                 isFirst = false;
             }
         }
-    }while(nextPermutation(route, route + routeSize)); //continue with new permutation
+    }while(next_permutation(route, route + routeSize)); //continue with new permutation
 
     cout<<" Weight: "<<firstShortestPathWeight<<"     ";
     cout<<fixed<<setprecision(2)<<"PRD: "<<firstPRD<<"%"<<endl;

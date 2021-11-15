@@ -62,5 +62,8 @@ int heldKarp(GraphAM *graph)
         }
     }
 
+    for(int i = 0; i<numberOfCombinations; i++) delete [] paths[i];
+        delete [] paths;
+
     return answer;
 }

@@ -38,12 +38,14 @@ void runHeldKarp(GraphAM *graph){
 int main(){
     GraphAM *graph = new GraphAM();
 
-    graph->fillGraphFromFile("data/m12.atsp");
+    graph->fillGraphFromFile("instances/m10.atsp");
     //graph->printGraph();
 
     runBruteForce(graph, 0);
 
     runHeldKarp(graph);
+
+    delete graph;
 
     return 0;
 }
