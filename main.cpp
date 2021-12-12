@@ -1,9 +1,11 @@
 #include <iostream>
 #include <string>
 #include <conio.h>
+#include <float.h>
 #include "AdjacencyMatrixGraph/graphAM.cpp"
 #include "BruteForce/bruteForce.cpp"
 #include "HeldKarp/heldKarp.cpp"
+#include "SimulatedAnnealing/simulatedAnnealing.cpp"
 #include "Timer/timer.cpp"
 
 using namespace std;
@@ -36,15 +38,44 @@ void runHeldKarp(GraphAM *graph){
     cout<<fixed<<setprecision(4)<<" Held-Karp took: "<<time<<unit<<endl<<endl;
 }
 
+void runSimulatedAnnealing(GraphAM *graph){
+    float time = 0;
+    pair<vector<int>, int> answer;
+
+    Timer timer;
+    answer = solveSA(graph, 9999999999999999999999999999999999999999999999.9, 0.999, 1000);
+    time += timer.getTime().count() * unitFactor;
+
+    int weight = answer.second;
+    string path = "";
+    vector<int>::iterator it = answer.first.begin();
+
+    while (it != answer.first.end())
+    {
+        path += to_string(*it);
+        path += " ";
+        it++;
+    }
+
+    int optimalWeight = graph->getOptimalValue();
+    cout<<" Weight: "<<weight<<endl;
+    cout<<" Optimal weight: "<<optimalWeight<<endl;
+    cout<<fixed<<setprecision(4)<<" Error: "<<double(100 * (weight - optimalWeight))/optimalWeight<<"%"<<endl;
+    cout<<" Path: "<<path<<endl;
+    cout<<" Simulated annealing took: "<<time<<unit<<endl<<endl;
+}
+
 int main(){
     GraphAM *graph = new GraphAM();
 
-    graph->fillGraphFromFile("data/m12.atsp");
+    graph->fillGraphFromFile("data/gr120.tsp");
     //graph->printGraph();
 
-    runBruteForce(graph, 0);
+    //runBruteForce(graph, 0);
 
-    runHeldKarp(graph);
+    //runHeldKarp(graph);
+
+    runSimulatedAnnealing(graph);
 
     delete graph;
 

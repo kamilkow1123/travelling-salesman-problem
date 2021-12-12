@@ -50,6 +50,7 @@ int GraphAM::getNumOfVertexes(){ //get the number of vertices
 }
 
 int GraphAM::findElement(int n, int m){ //return the value from the array's given indexes
+    if(n >= this->numOfVertexes || m >= this->numOfVertexes) return -1;
     return graph[n][m];
 }
 

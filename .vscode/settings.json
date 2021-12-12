@@ -4,6 +4,8 @@
         "xutility": "cpp",
         "vector": "cpp",
         "iostream": "cpp",
-        "xlocale": "cpp"
+        "xlocale": "cpp",
+        "random": "cpp",
+        "ostream": "cpp"
     }
 }
