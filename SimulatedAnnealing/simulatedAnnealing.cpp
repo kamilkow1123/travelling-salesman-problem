@@ -1,20 +1,8 @@
 #include <iostream>
-#include <string.h>
-#include <fstream>
-#include <stdio.h>
-#include <chrono>
-#include <vector>
 #include <random>
-#include <string>
-#include <sstream>
-#include <algorithm>
-#include <io.h>
-#include <iomanip>
 #include <numeric>
-#include <cstdlib>
 #include "../AdjacencyMatrixGraph/graphAM.h"
 using namespace std;
-using namespace std::chrono;
 
 int random(int min, int max) //range : [min, max]
 {
