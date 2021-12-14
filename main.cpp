@@ -43,7 +43,7 @@ void runSimulatedAnnealing(GraphAM *graph){
     pair<vector<int>, int> answer;
 
     Timer timer;
-    answer = solveSA(graph, 9999999999999999999999999999999999999999999999.9, 0.999, 1000);
+    answer = solveSA(graph, 0.999, 1000);
     time += timer.getTime().count() * unitFactor;
 
     int weight = answer.second;
@@ -68,7 +68,16 @@ void runSimulatedAnnealing(GraphAM *graph){
 int main(){
     GraphAM *graph = new GraphAM();
 
-    graph->fillGraphFromFile("data/gr120.tsp");
+    // graph->fillGraphFromFile("instances/m10.atsp");
+    // graph->fillGraphFromFile("instances/gr17.tsp");
+    // graph->fillGraphFromFile("instances/gr48.tsp");
+    graph->fillGraphFromFile("instances/gr120.tsp");
+    // graph->fillGraphFromFile("instances/gr137.tsp");
+    // graph->fillGraphFromFile("instances/gr202.tsp");
+    // graph->fillGraphFromFile("instances/gr229.tsp");
+    // graph->fillGraphFromFile("instances/rbg443.atsp");
+    // graph->fillGraphFromFile("instances/rbg403.atsp");
+
     //graph->printGraph();
 
     //runBruteForce(graph, 0);
