@@ -71,12 +71,11 @@ int main(){
     // graph->fillGraphFromFile("instances/m10.atsp");
     // graph->fillGraphFromFile("instances/gr17.tsp");
     // graph->fillGraphFromFile("instances/gr48.tsp");
-    graph->fillGraphFromFile("instances/gr120.tsp");
+    // graph->fillGraphFromFile("instances/gr120.tsp");
     // graph->fillGraphFromFile("instances/gr137.tsp");
     // graph->fillGraphFromFile("instances/gr202.tsp");
-    // graph->fillGraphFromFile("instances/gr229.tsp");
-    // graph->fillGraphFromFile("instances/rbg443.atsp");
     // graph->fillGraphFromFile("instances/rbg403.atsp");
+    graph->fillGraphFromFile("instances/rbg443.atsp");
 
     //graph->printGraph();
 

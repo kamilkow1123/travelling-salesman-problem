@@ -111,6 +111,7 @@ pair<vector<int>, int> solveSA(GraphAM *graph, float alpha, int eraLength)
 {
     random_device rd;
     mt19937 g(rd());
+
     int numOfVertices = graph->getNumOfVertexes();
     vector<int> permutation = initialPermutation(graph);
     vector<int> bestPermutation = permutation;
@@ -153,7 +154,7 @@ pair<vector<int>, int> solveSA(GraphAM *graph, float alpha, int eraLength)
         }
         currentTemp = initialTemp*pow(alpha, ++iterationCounter);
         prevBestCost = bestCost;
-         if(cost < bestCost){
+        if(cost < bestCost){
             bestCost = cost;
             bestPermutation = permutation;
         }
