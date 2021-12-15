@@ -73,7 +73,7 @@ vector<int> initialPermutation(GraphAM *graph)
     return permutation;
 }
 
-vector<int> permutationSwap(vector<int> permutation)
+vector<int> permutationSwapRandom(vector<int> permutation)
 {
     int firstIndex = random(0, permutation.size() - 1);
     int secondIndex =  random(0, permutation.size() - 1);
@@ -92,10 +92,10 @@ double initialTemperature(GraphAM *graph)
     vector<int> permutation = initialPermutation(graph);
     vector<int> prevPermutation = initialPermutation(graph);
 
-    prevPermutation = permutationSwap(prevPermutation);
+    prevPermutation = permutationSwapRandom(prevPermutation);
     for (int i = 0; i < numOfVertices; i++)
     {
-        permutation = permutationSwap(permutation);
+        permutation = permutationSwapRandom(permutation);
         tempCost = abs(costOfPermutation(graph, prevPermutation) - costOfPermutation(graph, permutation));
         if(tempCost > maxCost) maxCost = tempCost;
         prevPermutation = permutation;
@@ -137,7 +137,7 @@ pair<vector<int>, int> solveSA(GraphAM *graph, float alpha, int eraLength)
 
         for (int i = 0; i < eraLength; i++){
             vector<int> newPermutation;
-            newPermutation = permutationSwap(permutation);
+            newPermutation = permutationSwapRandom(permutation);
             int newCost = costOfPermutation(graph, newPermutation);
 
             if (newCost < cost){

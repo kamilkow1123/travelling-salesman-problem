@@ -5,7 +5,8 @@
 #include "AdjacencyMatrixGraph/graphAM.cpp"
 #include "BruteForce/bruteForce.cpp"
 #include "HeldKarp/heldKarp.cpp"
-#include "SimulatedAnnealing/simulatedAnnealing.cpp"
+// #include "SimulatedAnnealing/simulatedAnnealing.cpp"
+#include "TabuSearch/tabuSearch.cpp"
 #include "Timer/timer.cpp"
 
 using namespace std;
@@ -42,6 +43,7 @@ void runSimulatedAnnealing(GraphAM *graph){
     float time = 0;
     pair<vector<int>, int> answer;
 
+    cout<<" Running Simulated Annealing"<<endl;
     Timer timer;
     answer = solveSA(graph, 0.999, 1000);
     time += timer.getTime().count() * unitFactor;
@@ -65,17 +67,50 @@ void runSimulatedAnnealing(GraphAM *graph){
     cout<<" Simulated annealing took: "<<time<<unit<<endl<<endl;
 }
 
+void runTabuSearch(GraphAM *graph){
+    float time = 0;
+    pair<vector<int>, int> answer;
+
+    cout<<" Running Tabu Search"<<endl;
+    Timer timer;
+    answer = solveTS(graph, 1000);
+    time += timer.getTime().count() * unitFactor;
+
+    int weight = answer.second;
+    string path = "";
+    vector<int>::iterator it = answer.first.begin();
+
+    while (it != answer.first.end())
+    {
+        path += to_string(*it);
+        path += " ";
+        it++;
+    }
+
+    int optimalWeight = graph->getOptimalValue();
+    cout<<" Weight: "<<weight<<endl;
+    cout<<" Optimal weight: "<<optimalWeight<<endl;
+    cout<<fixed<<setprecision(4)<<" Error: "<<double(100 * (weight - optimalWeight))/optimalWeight<<"%"<<endl;
+    cout<<" Path: "<<path<<endl;
+    cout<<" Tabu search took: "<<time<<unit<<endl<<endl;
+}
+
 int main(){
     GraphAM *graph = new GraphAM();
 
+    // graph->fillGraphFromFile("instances/m6.atsp");
     // graph->fillGraphFromFile("instances/m10.atsp");
     // graph->fillGraphFromFile("instances/gr17.tsp");
+    // graph->fillGraphFromFile("instances/gr24.tsp");
+    graph->fillGraphFromFile("instances/ftv38.atsp");
     // graph->fillGraphFromFile("instances/gr48.tsp");
+    // graph->fillGraphFromFile("instances/eil101.tsp");
     // graph->fillGraphFromFile("instances/gr120.tsp");
-    // graph->fillGraphFromFile("instances/gr137.tsp");
-    // graph->fillGraphFromFile("instances/gr202.tsp");
+    // graph->fillGraphFromFile("instances/bier127.tsp");
+    // graph->fillGraphFromFile("instances/pr152.tsp");
+    // graph->fillGraphFromFile("instances/rat195.tsp");
     // graph->fillGraphFromFile("instances/rbg403.atsp");
-    graph->fillGraphFromFile("instances/rbg443.atsp");
+    // graph->fillGraphFromFile("instances/rbg443.atsp");
 
     //graph->printGraph();
 
@@ -84,6 +119,8 @@ int main(){
     //runHeldKarp(graph);
 
     runSimulatedAnnealing(graph);
+
+    runTabuSearch(graph);
 
     delete graph;
 
