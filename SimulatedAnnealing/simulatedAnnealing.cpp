@@ -1,6 +1,10 @@
 #include <iostream>
 #include <random>
 #include <numeric>
+#include <string>
+#include <ctime>
+#include <iomanip>
+#include <cmath>
 #include "../AdjacencyMatrixGraph/graphAM.h"
 using namespace std;
 
@@ -107,7 +111,7 @@ void printNewAnswer(int i, int cost, int opt){
     cout<<" "<<i<<".   "<<cost<<"   "<<fixed<<setprecision(4)<<double(100 * (cost - opt))/opt<<"%"<<endl;
 }
 
-pair<vector<int>, int> solveSA(GraphAM *graph, float alpha, int eraLength)
+pair<vector<int>, int> solveSA(GraphAM *graph, float alpha)
 {
     random_device rd;
     mt19937 g(rd());
@@ -115,6 +119,8 @@ pair<vector<int>, int> solveSA(GraphAM *graph, float alpha, int eraLength)
     int numOfVertices = graph->getNumOfVertexes();
     vector<int> permutation = initialPermutation(graph);
     vector<int> bestPermutation = permutation;
+
+    int eraLength = 10*numOfVertices;
 
     int cost = costOfPermutation(graph, permutation);
     int prevCost = cost;

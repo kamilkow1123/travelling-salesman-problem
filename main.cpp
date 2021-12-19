@@ -45,7 +45,7 @@ void runSimulatedAnnealing(GraphAM *graph){
 
     cout<<" Running Simulated Annealing"<<endl;
     Timer timer;
-    answer = solveSA(graph, 0.999, 1000);
+    answer = solveSA(graph, 0.999);
     time += timer.getTime().count() * unitFactor;
 
     int weight = answer.second;
@@ -102,13 +102,18 @@ int main(){
     // graph->fillGraphFromFile("instances/m10.atsp");
     // graph->fillGraphFromFile("instances/gr17.tsp");
     // graph->fillGraphFromFile("instances/gr24.tsp");
-    graph->fillGraphFromFile("instances/ftv38.atsp");
+    // graph->fillGraphFromFile("instances/ftv38.atsp");
     // graph->fillGraphFromFile("instances/gr48.tsp");
     // graph->fillGraphFromFile("instances/eil101.tsp");
-    // graph->fillGraphFromFile("instances/gr120.tsp");
+    // graph->fillGraphFromFile("instances/att48.tsp");
+    graph->fillGraphFromFile("instances/gr120.tsp");
     // graph->fillGraphFromFile("instances/bier127.tsp");
     // graph->fillGraphFromFile("instances/pr152.tsp");
+    // graph->fillGraphFromFile("instances/u159.tsp");
     // graph->fillGraphFromFile("instances/rat195.tsp");
+    // graph->fillGraphFromFile("instances/tsp225.tsp");
+    // graph->fillGraphFromFile("instances/pr299.tsp");
+    // graph->fillGraphFromFile("instances/rbg323.atsp");
     // graph->fillGraphFromFile("instances/rbg403.atsp");
     // graph->fillGraphFromFile("instances/rbg443.atsp");
 
@@ -118,7 +123,7 @@ int main(){
 
     //runHeldKarp(graph);
 
-    runSimulatedAnnealing(graph);
+    //runSimulatedAnnealing(graph);
 
     runTabuSearch(graph);
 

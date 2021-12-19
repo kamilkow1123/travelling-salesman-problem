@@ -1,10 +1,3 @@
-#include <iostream>
-#include <random>
-#include <numeric>
-#include <string>
-#include <ctime>
-#include <iomanip>
-#include <cmath>
 #include "../AdjacencyMatrixGraph/graphAM.h"
 #include "../SimulatedAnnealing/simulatedAnnealing.cpp"
 using namespace std;
