@@ -119,6 +119,7 @@ pair<vector<int>, int> solveSA(GraphAM *graph, float alpha)
     int numOfVertices = graph->getNumOfVertexes();
     vector<int> permutation = initialPermutation(graph);
     vector<int> bestPermutation = permutation;
+    printVector(permutation);
 
     int eraLength = 10*numOfVertices;
 
